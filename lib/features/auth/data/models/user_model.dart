@@ -48,4 +48,16 @@ class UserModel extends UserEntity {
       'local': local,
     };
   }
+
+  UserEntity toEntity() {
+    return UserEntity(
+        phoneNumber: phoneNumber,
+        password: password,
+        token: token,
+        firstName: firstName,
+        lastName: lastName,
+        profilePictureURL: profilePictureURL,
+        location: location,
+        local: local);
+  }
 }

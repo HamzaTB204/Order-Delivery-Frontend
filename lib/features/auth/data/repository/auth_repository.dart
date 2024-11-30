@@ -30,11 +30,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<AppFailure, UserEntity>> login(
       String phoneNumber, String password) async {
     try {
-      final String token = await authRDS.login(phoneNumber, password);
-      final UserModel userModel =
-          _createLoggedinUser(phoneNumber, password, token);
-      await userLDS.storeUser(userModel);
-      return Right(_convertToEntity(userModel));
+      final UserModel user = await authRDS.login(phoneNumber, password);
+      await userLDS.storeUser(user);
+      return Right(user.toEntity());
     } on NetworkException catch (e) {
       return Left(NetworkFailure(failureMessage: e.message));
     } on ServerException catch (e) {
@@ -60,31 +58,6 @@ class AuthRepositoryImpl implements AuthRepository {
         phoneNumber: phoneNumber,
         password: password,
         token: '-1',
-        firstName: null,
-        lastName: null,
-        profilePictureURL: null,
-        location: null,
-        local: null);
-  }
-
-  UserModel _createLoggedinUser(
-      String phoneNumber, String password, String token) {
-    return UserModel(
-        phoneNumber: phoneNumber,
-        password: password,
-        token: token,
-        firstName: null,
-        lastName: null,
-        profilePictureURL: null,
-        location: null,
-        local: null);
-  }
-
-  UserEntity _convertToEntity(UserModel userModel) {
-    return UserEntity(
-        phoneNumber: userModel.phoneNumber,
-        password: userModel.password,
-        token: userModel.token,
         firstName: null,
         lastName: null,
         profilePictureURL: null,

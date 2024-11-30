@@ -6,6 +6,7 @@ import 'package:order_delivery/core/errors/failures.dart';
 import 'package:order_delivery/features/auth/data/data-sources/user_local_data_source.dart';
 import 'package:order_delivery/features/auth/data/data-sources/user_remote_data_source.dart';
 import 'package:order_delivery/features/auth/data/models/user_model.dart';
+import 'package:order_delivery/features/auth/domain/enitities/user_entity.dart';
 import 'package:order_delivery/features/auth/domain/repository/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -28,6 +29,17 @@ class UserRepositoryImpl implements UserRepository {
       return Left(NetworkFailure(failureMessage: e.message));
     } on ServerException catch (e) {
       return Left(ServerFailure(failureMessage: e.message));
+    }
+  }
+
+  @override
+  Future<Either<AppFailure, UserEntity?>> getLocalUser() async {
+    try {
+      final UserModel? user = await userLDS.loadUser();
+      return Right(user?.toEntity());
+    } catch (e) {
+      return Left(
+          OfflineFailure(failureMessage: "Error while loading local user"));
     }
   }
 

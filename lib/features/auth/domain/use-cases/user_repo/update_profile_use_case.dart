@@ -6,16 +6,16 @@ import 'package:order_delivery/core/errors/failures.dart';
 import 'package:order_delivery/features/auth/domain/repository/user_repository.dart';
 
 class UpdateProfileUseCase extends Equatable {
-  final UserRepository authRepository;
+  final UserRepository userRepository;
 
-  const UpdateProfileUseCase({required this.authRepository});
+  const UpdateProfileUseCase({required this.userRepository});
 
   Future<Either<AppFailure, Unit>> call(String firstName, String lastName,
       File? image, String location, String token) async {
-    return await authRepository.updateProfile(
+    return await userRepository.updateProfile(
         firstName, lastName, image, location, token);
   }
 
   @override
-  List<Object?> get props => [authRepository];
+  List<Object?> get props => [userRepository];
 }
