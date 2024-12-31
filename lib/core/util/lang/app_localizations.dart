@@ -11,7 +11,7 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const List<Locale> supportedLocals = [Locale('ar'), Locale('en')];
+  static const List<Locale> supportedLocals = [Locale('en'), Locale('ar')];
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
   late Map<String, String> _localizedStrings;

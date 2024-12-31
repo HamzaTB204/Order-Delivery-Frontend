@@ -62,7 +62,7 @@ class AuthRepositoryImpl implements AuthRepository {
         lastName: null,
         profilePictureURL: null,
         location: null,
-        local: null);
+        locale: null);
   }
 
   @override

@@ -21,8 +21,13 @@ dependencies:
   equatable: ^2.0.7
   fpdart: ^1.1.1
   get_it: ^8.0.2
-  image_picker: ^1.0.8
+  image_picker: ^1.1.2
   shared_preferences: ^2.2.3
+  flex_color_scheme: ^8.0.1
+  connectivity_plus: ^6.1.0
+  path: ^1.9.0
+  carousel_slider: ^5.0.0
+  bloc_concurrency: ^0.2.5
 
 dev_dependencies:
   flutter_test:
@@ -37,15 +42,16 @@ flutter:
   assets:
     - assets/lang/en.json
     - assets/lang/ar.json
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+    - assets/splash/splash.jpg
+  fonts:
+     - family: DancingScript
+       fonts:
+         - asset: fonts/dancingscript/static/DancingScript-Bold.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+     - family: PlayfairDisplay
+       fonts:
+         - asset: fonts/playfair/static/PlayfairDisplay-Bold.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

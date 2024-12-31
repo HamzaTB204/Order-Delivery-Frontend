@@ -9,9 +9,15 @@ sealed class UserState extends Equatable {
 
 final class UserInitial extends UserState {}
 
+class LoadingState extends UserState {}
+
 class UpdatingUserProfileState extends UserState {}
 
+class ChangingUserLanguageState extends UserState {}
+
 class UpdatedUserProfileState extends UserState {}
+
+class ChangedUserLanguageState extends UserState {}
 
 class FailedUserState extends UserState {
   final AppFailure failure;

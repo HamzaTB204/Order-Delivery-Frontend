@@ -23,3 +23,11 @@ class UpdateUserProfileEvent extends UserEvent {
       ? [firstName, lastName, location, token]
       : [firstName, lastName, location, token, image!];
 }
+
+class ChangeUserLanguageEvent extends UserEvent {
+  final String token, locale;
+
+  const ChangeUserLanguageEvent({required this.token, required this.locale});
+  @override
+  List<Object> get props => [token, locale];
+}

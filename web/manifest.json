@@ -1,6 +1,6 @@
 {
-    "name": "order_delivery",
-    "short_name": "order_delivery",
+    "name": "link_auth",
+    "short_name": "link_auth",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

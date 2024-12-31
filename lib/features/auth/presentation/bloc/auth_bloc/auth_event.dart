@@ -29,5 +29,5 @@ class LogoutEvent extends AuthEvent {
   LogoutEvent({required this.token});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [token];
 }

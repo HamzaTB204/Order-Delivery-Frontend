@@ -1,0 +1,94 @@
+{
+    "store": {
+        "id": 1,
+        "name": "Amazon",
+        "logo": "http://localhost:8000/storage/logos/BuPkPQV8dPZ53GTosT8wcDromCr5YS9tiIQniZxS.jpg",
+        "product_count": 2
+    },
+    "products": {
+        "current_page": 1,
+        "data": [
+            {
+                "id": 1,
+                "en_name": "apple",
+                "ar_name": "تفاح",
+                "en_description": "this is an apple",
+                "ar_description": "هذا تفاح",
+                "price": "200.00",
+                "quantity": 0,
+                "orders_count": 1,
+                "store_id": 1,
+                "created_at": "2024-12-04T08:33:37.000000Z",
+                "updated_at": "2024-12-28T05:50:23.000000Z",
+                "images": [
+                    {
+                        "id": 1,
+                        "path": "gallery/Azl0WrHRZIkz28MtDvdM7kTDLl0euyK65BTArhzy.jpg",
+                        "product_id": 1,
+                        "created_at": "2024-12-04T08:33:49.000000Z",
+                        "updated_at": "2024-12-04T08:33:49.000000Z",
+                        "url": "http://localhost:8000/storage/gallery/Azl0WrHRZIkz28MtDvdM7kTDLl0euyK65BTArhzy.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "path": "gallery/Qr60n80yadLyHettBkivFYF8OAPWrLwairVSQn96.jpg",
+                        "product_id": 1,
+                        "created_at": "2024-12-04T08:48:58.000000Z",
+                        "updated_at": "2024-12-04T08:48:58.000000Z",
+                        "url": "http://localhost:8000/storage/gallery/Qr60n80yadLyHettBkivFYF8OAPWrLwairVSQn96.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "en_name": "orange",
+                "ar_name": "برتقال",
+                "en_description": "this is an orange",
+                "ar_description": "هذا برتقال",
+                "price": "100.00",
+                "quantity": 14,
+                "orders_count": 0,
+                "store_id": 1,
+                "created_at": "2024-12-04T11:13:55.000000Z",
+                "updated_at": "2024-12-28T05:50:27.000000Z",
+                "images": [
+                    {
+                        "id": 3,
+                        "path": "gallery/Sv2pTSgICnEyLJFPI4fdPG6YrELvmPTx8ZYeLUTR.jpg",
+                        "product_id": 2,
+                        "created_at": "2024-12-28T05:53:23.000000Z",
+                        "updated_at": "2024-12-28T05:53:23.000000Z",
+                        "url": "http://localhost:8000/storage/gallery/Sv2pTSgICnEyLJFPI4fdPG6YrELvmPTx8ZYeLUTR.jpg"
+                    }
+                ]
+            }
+        ],
+        "first_page_url": "http://localhost:8000/api/stores/1?page=1",
+        "from": 1,
+        "last_page": 1,
+        "last_page_url": "http://localhost:8000/api/stores/1?page=1",
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http://localhost:8000/api/stores/1?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "next_page_url": null,
+        "path": "http://localhost:8000/api/stores/1",
+        "per_page": 10,
+        "prev_page_url": null,
+        "to": 2,
+        "total": 2
+    }
+}

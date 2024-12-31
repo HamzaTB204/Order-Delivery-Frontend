@@ -9,4 +9,6 @@ abstract class UserRepository extends Equatable {
   Future<Either<AppFailure, Unit>> updateProfile(String firstName,
       String lastName, File? image, String location, String token);
   Future<Either<AppFailure, UserEntity?>> getLocalUser();
+
+  Future<Either<AppFailure, Unit>> changeLanguage(String token, String locale);
 }

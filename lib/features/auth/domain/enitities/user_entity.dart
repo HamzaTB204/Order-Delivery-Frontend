@@ -1,6 +1,6 @@
 class UserEntity {
   final String phoneNumber, password, token;
-  final String? firstName, lastName, profilePictureURL, location, local;
+  final String? firstName, lastName, profilePictureURL, location, locale;
 
   UserEntity(
       {required this.phoneNumber,
@@ -10,5 +10,5 @@ class UserEntity {
       required this.lastName,
       required this.profilePictureURL,
       required this.location,
-      required this.local});
+      required this.locale});
 }

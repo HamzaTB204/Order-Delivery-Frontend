@@ -1,0 +1,35 @@
+{
+    "message": "Product retrieved successfully.",
+    "product": {
+        "id": 1,
+        "en_name": "apple",
+        "ar_name": "تفاح",
+        "en_description": "this is an apple",
+        "ar_description": "هذا تفاح",
+        "price": "200.00",
+        "quantity": 0,
+        "orders_count": 1,
+        "store_id": 1,
+        "created_at": "2024-12-04T08:33:37.000000Z",
+        "updated_at": "2024-12-28T05:50:23.000000Z",
+        "store_name": "Amazon",
+        "images": [
+            {
+                "id": 1,
+                "path": "gallery/Azl0WrHRZIkz28MtDvdM7kTDLl0euyK65BTArhzy.jpg",
+                "product_id": 1,
+                "created_at": "2024-12-04T08:33:49.000000Z",
+                "updated_at": "2024-12-04T08:33:49.000000Z",
+                "url": "http://localhost:8000/storage/gallery/Azl0WrHRZIkz28MtDvdM7kTDLl0euyK65BTArhzy.jpg"
+            },
+            {
+                "id": 2,
+                "path": "gallery/Qr60n80yadLyHettBkivFYF8OAPWrLwairVSQn96.jpg",
+                "product_id": 1,
+                "created_at": "2024-12-04T08:48:58.000000Z",
+                "updated_at": "2024-12-04T08:48:58.000000Z",
+                "url": "http://localhost:8000/storage/gallery/Qr60n80yadLyHettBkivFYF8OAPWrLwairVSQn96.jpg"
+            }
+        ]
+    }
+}

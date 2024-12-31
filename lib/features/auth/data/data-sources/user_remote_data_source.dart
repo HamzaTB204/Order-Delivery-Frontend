@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
@@ -8,9 +9,13 @@ import 'package:order_delivery/core/errors/errors.dart';
 abstract class UserRemoteDataSource extends Equatable {
   Future<String> updateProfile(String firstName, String lastName, File? image,
       String location, String token);
+  Future<String> changeLanguage(String token, String locale);
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
+  final http.Client client;
+
+  const UserRemoteDataSourceImpl({required this.client});
   @override
   Future<String> updateProfile(String firstName, String lastName, File? image,
       String location, String token) async {
@@ -39,9 +44,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       final response = await request.send();
 
       if (response.statusCode == 200) {
-        // // TODO: return the download link of that url
-        // throw UnimplementedError();
-        return "ERRORORORR in user remote data source";
+        final responseBody = await response.stream.bytesToString();
+        final responseData = jsonDecode(responseBody);
+        return responseData['user']['profile_picture'];
       } else {
         throw ServerException(
             message: "Server error while updating user profile data");
@@ -49,6 +54,27 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     } catch (e) {
       throw NetworkException(
           message: "Network Error while updating user profile data: $e");
+    }
+  }
+
+  @override
+  Future<String> changeLanguage(String token, String locale) async {
+    try {
+      final response = await client.post(Uri.parse(CHANGE_LANG_LINK),
+          headers: {'Authorization': 'Bearer $token'},
+          body: {'locale': locale});
+      if (response.statusCode >= 200 || response.statusCode <= 300) {
+        return jsonDecode(response.body)['locale'];
+      } else {
+        throw ServerException(
+            message:
+                "Server Error while changing language:${response.reasonPhrase}");
+      }
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw NetworkException(
+          message: "Network Error during posting products: $e");
     }
   }
 

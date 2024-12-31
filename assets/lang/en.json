@@ -1,3 +1,30 @@
 {
-    "greeting":"Hallo"
+    "pw":"password" ,
+    "cpw": "confirm password",
+    "pn": "phone number"  ,
+    "LI" : " LOG IN " ,
+    "li" : "  Log in  ",
+    "msg1" : "if you don't have an account : " ,
+    "su" : "   Sign up   " ,
+    "SU" : "SIGN UP" ,
+    "warning" : "this field shouldn't be empty ",
+    "warning2" : "not valid password ",
+    "warning3" : "it's not a phone number ",
+    "welcome" : "WELCOME !",
+    "create" : "Create your account : ",
+    "msg2" : "if you have an account " ,
+    "update profile" : "Update Profile Page ",
+    "profile" : "add profile picture : " ,
+    "from gallery" : "from gallery",
+    "from camera" : "from camera",
+    "extra info" : "add extra info about your self : " ,
+    "first name" : "first name " ,
+    "last name" : "last name " ,
+    "location" : "location" ,
+    "finish" : "finish" ,
+    "skip" : "Skip",
+    "syl":"Select Your App Language",
+    "en":"English",
+    "ar":"Arabic"
+
 }

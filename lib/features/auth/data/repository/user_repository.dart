@@ -43,6 +43,21 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 
+  @override
+  Future<Either<AppFailure, Unit>> changeLanguage(
+      String token, String locale) async {
+    try {
+      final userLocale = await userRDS.changeLanguage(token, locale);
+      final UserModel? user = await userLDS.loadUser();
+      await userLDS.storeUser(_createChangedLangUser(user!, userLocale));
+      return const Right(unit);
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(failureMessage: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(failureMessage: e.message));
+    }
+  }
+
   UserModel _createUpdatedUser(
       UserModel user,
       String firstName,
@@ -54,12 +69,24 @@ class UserRepositoryImpl implements UserRepository {
     return UserModel(
         firstName: firstName,
         lastName: lastName,
-        local: null,
+        locale: user.locale,
         location: location,
         password: user.password,
         phoneNumber: user.phoneNumber,
         token: token,
         profilePictureURL: profilePictureURL);
+  }
+
+  UserModel _createChangedLangUser(UserModel user, String locale) {
+    return UserModel(
+        firstName: user.firstName,
+        lastName: user.lastName,
+        locale: locale,
+        location: user.location,
+        password: user.password,
+        phoneNumber: user.phoneNumber,
+        token: user.token,
+        profilePictureURL: user.profilePictureURL);
   }
 
   @override

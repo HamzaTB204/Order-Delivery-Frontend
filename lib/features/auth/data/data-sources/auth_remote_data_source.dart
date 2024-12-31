@@ -6,6 +6,8 @@ import 'package:order_delivery/core/constants/strings.dart';
 import 'package:order_delivery/core/errors/errors.dart';
 import 'package:order_delivery/features/auth/data/models/user_model.dart';
 
+// ! we need to add this to the request header 'Authorization': 'Bearer 3|u88Nk275L4YGOCnk1Mt50zl79OfTFgDIUrmxPauxb1963953',
+
 abstract class AuthRemoteDataSource extends Equatable {
   Future<void> signup(String phoneNumber, String password);
   Future<UserModel> login(String phoneNumber, String password);
@@ -21,17 +23,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> signup(String phoneNumber, String password) async {
     try {
       final response = await client.post(Uri.parse(SIGNUP_LINK), body: {
-        'phoneNumber': phoneNumber,
+        'phone': phoneNumber,
         'password': password,
       });
 
-      if (response.statusCode == 200) {
+      if (response.statusCode >= 200 && response.statusCode <= 300) {
         return;
       } else if (response.statusCode == 405) {
         throw ServerException(message: "Wrong phone number or password");
       } else {
         throw ServerException(message: "Server Error while Signing up");
       }
+    } on ServerException catch (se) {
+      throw NetworkException(
+          message: "Network Error during signup: ${se.message}");
     } catch (e) {
       throw NetworkException(message: "Network Error during signup: $e");
     }
@@ -43,19 +48,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final response = await client.post(
         Uri.parse(LOGIN_LINK),
         body: {
-          'phoneNumber': phoneNumber,
+          'phone': phoneNumber,
           'password': password,
         },
       );
-
-      if (response.statusCode == 200) {
-        final UserModel user = UserModel.fromJson(json.decode(response.body));
+      if (response.statusCode >= 200 && response.statusCode <= 300) {
+        final decodedRequest = json.decode(response.body);
+        final UserModel user =
+            UserModel.fromJson(decodedRequest['user'], password);
         return user;
-      } else if (response.statusCode == 406) {
+      } else if (response.statusCode == 401) {
         throw ServerException(message: "Wrong phone number or password");
       } else {
         throw ServerException(message: "Server Error while logging in");
       }
+    } on ServerException catch (se) {
+      throw NetworkException(
+          message: "Network Error during login: ${se.message}");
     } catch (e) {
       throw NetworkException(message: "Network Error during login: $e");
     }
@@ -70,15 +79,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> responseBody = json.decode(response.body);
-        final bool isLoggedout = responseBody['status'] as bool;
-
-        return isLoggedout;
+        return true;
       } else {
         throw ServerException(message: "Server Error while logging out");
       }
+    } on ServerException catch (se) {
+      throw NetworkException(
+          message: "Network Error during logout: ${se.message}");
     } catch (e) {
-      throw NetworkException(message: "Network Error while logging out");
+      throw NetworkException(message: "Network Error during logout: $e");
     }
   }
 

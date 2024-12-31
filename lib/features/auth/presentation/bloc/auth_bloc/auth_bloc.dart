@@ -23,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       if (event is DefineCurrentStateEvent) {
-        emit(LoadingAuthState());
+        emit(AuthInitial());
         final either = await getLocalUser();
         either.fold((failure) => emit(FailedAuthState(failure: failure)),
             (loadedUser) => _mapLoadedUser(loadedUser, emit));
@@ -35,12 +35,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (event is LoginEvent) {
         emit(LoadingAuthState());
         final either = await login(event.phoneNumber, event.password);
-        either.fold((failure) => FailedAuthState(failure: failure),
+        either.fold((failure) => emit(FailedAuthState(failure: failure)),
             (user) => emit(LoggedinAuthState(user: user)));
       } else if (event is LogoutEvent) {
         emit(LoadingAuthState());
         final either = await logout(event.token);
-        either.fold((failure) => FailedAuthState(failure: failure),
+        either.fold((failure) => emit(FailedAuthState(failure: failure)),
             (user) => emit(NotLoggedinAuthState()));
       }
     });
