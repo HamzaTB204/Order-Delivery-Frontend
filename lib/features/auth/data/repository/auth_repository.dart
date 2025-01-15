@@ -58,6 +58,7 @@ class AuthRepositoryImpl implements AuthRepository {
         phoneNumber: phoneNumber,
         password: password,
         token: '-1',
+        role: null,
         firstName: null,
         lastName: null,
         profilePictureURL: null,

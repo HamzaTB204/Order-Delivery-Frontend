@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_delivery/core/util/variables/others.dart';
+import 'package:order_delivery/features/auth/presentation/widgets/costum_loading_widget.dart';
 import 'package:order_delivery/features/auth/presentation/widgets/custom_text_form_field.dart';
+import '../../../../core/util/functions/functions.dart';
 import '../../../../core/util/lang/app_localizations.dart';
 import '../bloc/auth_bloc/auth_bloc.dart';
 
@@ -44,24 +45,16 @@ class _SignupPageState extends State<SignupPage> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is SignedupAuthState) {
-          // TODO: show singed up message
           Navigator.of(context).pop();
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            showSnackBar(context, Colors.green, "signed up msg".tr(context));
+          });
         }
       },
       builder: (context, state) {
         if (state is LoadingAuthState) {
-          //TODO: show appropriate loading widget
-          return Center(
-            child: CircularProgressIndicator(
-              color: Colors.greenAccent,
-            ),
-          );
-        } else if (state is FailedAuthState) {
-          //TODO: show error message in an appropriate way
-          return Center(
-            child: Text(state.failure.failureMessage,
-                style: TextStyle(color: Colors.red)),
-          );
+          return const CustomLoadingWidget();
         }
         return Form(
           key: signupFormKey,
@@ -120,6 +113,7 @@ class _SignupPageState extends State<SignupPage> {
               padding: WidgetStatePropertyAll(EdgeInsets.all(15))),
           onPressed: () {
             if (signupFormKey.currentState!.validate()) {
+              FocusScope.of(context).unfocus();
               BlocProvider.of<AuthBloc>(context).add(SignupEvent(
                   phoneNumber: phoneNumberTEC.text.trim(),
                   password: passwordTEC.text.trim()));
@@ -157,8 +151,6 @@ class _SignupPageState extends State<SignupPage> {
             validator: (value) {
               if (value!.isEmpty) {
                 return "warning".tr(context);
-              } else if (!numberExp.hasMatch(phoneNumberTEC.text.trim())) {
-                return "warning3".tr(context);
               }
               return null;
             },

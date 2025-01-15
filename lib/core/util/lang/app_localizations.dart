@@ -32,7 +32,7 @@ class AppLocalizations {
         return locale;
       }
     }
-    return supportedLocales.last;
+    return supportedLocales.first;
   }
 }
 
@@ -59,5 +59,5 @@ class _AppLocalizationsDelegate
 
 extension TranslateX on String {
   String tr(BuildContext context) =>
-      AppLocalizations.of(context)!.translate(this);
+      AppLocalizations.of(context)?.translate(this) ?? "";
 }

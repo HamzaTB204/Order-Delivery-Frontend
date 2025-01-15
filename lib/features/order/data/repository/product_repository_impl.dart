@@ -2,6 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:order_delivery/core/errors/errors.dart';
 import 'package:order_delivery/core/errors/failures.dart';
 import 'package:order_delivery/features/order/data/data-sources/product_remote_data_source.dart';
+import 'package:order_delivery/features/order/data/models/order_model.dart';
 import 'package:order_delivery/features/order/data/models/product_model.dart';
 import 'package:order_delivery/features/order/domain/enitities/detailed_product.entity.dart';
 import 'package:order_delivery/features/order/domain/enitities/product_entity.dart';
@@ -9,6 +10,7 @@ import 'package:order_delivery/features/order/domain/repository/product_reposito
 
 typedef ProductsGetterFunc = Future<List<ProductModel>> Function();
 typedef ProductsPosterFunc = Future<void> Function();
+typedef OrderGetterFunc = Future<List<OrderModel>> Function();
 
 class ProductRepositoryImpl implements ProductRepository {
   final ProductRemoteDataSource productRDS;
@@ -58,22 +60,94 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<Either<AppFailure, Unit>> addProductToCart(
       String token, String productId, int quantity) async {
-    return await _mapPostProducts(
+    return await _mapUnitProducts(
         () => productRDS.addProductToCart(token, productId, quantity));
   }
 
   @override
   Future<Either<AppFailure, Unit>> addProductToFavorite(
       String token, String productId) async {
-    return await _mapPostProducts(
+    return await _mapUnitProducts(
         () => productRDS.addProductToFavorite(token, productId));
   }
 
   @override
   Future<Either<AppFailure, Unit>> orderProduct(
       String token, String productId, int quantity) async {
-    return await _mapPostProducts(
+    return await _mapUnitProducts(
         () => productRDS.orderProduct(token, productId, quantity));
+  }
+
+  @override
+  Future<Either<AppFailure, List<ProductEntity>>> getCartProducts(
+      String token) async {
+    return await _mapGetProducts(() => productRDS.getCartProducts(token));
+  }
+
+  @override
+  Future<Either<AppFailure, List<ProductEntity>>> getFavProducts(
+      String token) async {
+    return await _mapGetProducts(() => productRDS.getFavProducts(token));
+  }
+
+  @override
+  Future<Either<AppFailure, Unit>> orderCartProducts(String token) async {
+    return await _mapUnitProducts(() => productRDS.orderCartProducts(token));
+  }
+
+  @override
+  Future<Either<AppFailure, Unit>> orderFavProducts(String token) async {
+    return await _mapUnitProducts(() => productRDS.orderFavProducts(token));
+  }
+
+  @override
+  Future<Either<AppFailure, Unit>> cancelOrder(
+      String token, String orderId) async {
+    return await _mapUnitProducts(() => productRDS.cancelOrder(token, orderId));
+  }
+
+  @override
+  Future<Either<AppFailure, Unit>> deleteCart(String token, String id) async {
+    return await _mapUnitProducts(() => productRDS.deleteCart(token, id));
+  }
+
+  @override
+  Future<Either<AppFailure, Unit>> deleteFav(String token, String id) async {
+    return await _mapUnitProducts(() => productRDS.deleteFav(token, id));
+  }
+
+  @override
+  Future<Either<AppFailure, List<OrderModel>>> getUserOrders(
+      String token) async {
+    return await _mapGetOrders(() => productRDS.getUserOrders(token));
+  }
+
+  @override
+  Future<Either<AppFailure, Unit>> updateCart(
+      String token, String id, int quantity) async {
+    return await _mapUnitProducts(
+        () => productRDS.updateCart(token, id, quantity));
+  }
+
+  @override
+  Future<Either<AppFailure, Unit>> updateOrder(
+      String token, String id, int quantity) async {
+    return await _mapUnitProducts(
+        () => productRDS.updateOrder(token, id, quantity));
+  }
+
+  // neu methoden zum uberprufen
+  @override
+  Future<Either<AppFailure, List<OrderModel>>> getDriverOrders(
+      String token) async {
+    return await _mapGetOrders(() => productRDS.getDriverOrders(token));
+  }
+
+  @override
+  Future<Either<AppFailure, Unit>> updateDriverOrder(
+      String token, String orderId, String newStatus) async {
+    return await _mapUnitProducts(
+        () => productRDS.changeOrderStatus(token, orderId, newStatus));
   }
 
   @override
@@ -94,11 +168,23 @@ class ProductRepositoryImpl implements ProductRepository {
     }
   }
 
-  Future<Either<AppFailure, Unit>> _mapPostProducts(
+  Future<Either<AppFailure, Unit>> _mapUnitProducts(
       ProductsPosterFunc func) async {
     try {
       await func();
       return Right(unit);
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(failureMessage: e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(failureMessage: e.message));
+    }
+  }
+
+  Future<Either<AppFailure, List<OrderModel>>> _mapGetOrders(
+      OrderGetterFunc func) async {
+    try {
+      final orders = await func();
+      return Right(orders);
     } on NetworkException catch (e) {
       return Left(NetworkFailure(failureMessage: e.message));
     } on ServerException catch (e) {

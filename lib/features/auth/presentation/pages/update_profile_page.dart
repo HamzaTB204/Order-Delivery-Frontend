@@ -4,8 +4,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:order_delivery/core/util/functions/functions.dart';
+import 'package:order_delivery/core/util/lang/app_localizations.dart';
+import 'package:order_delivery/features/auth/domain/enitities/user_entity.dart';
 import 'package:order_delivery/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:order_delivery/features/auth/presentation/bloc/user_bloc/user_bloc.dart';
+import 'package:order_delivery/features/auth/presentation/widgets/costum_loading_widget.dart';
+import 'package:order_delivery/features/auth/presentation/widgets/custom_error_widget.dart';
 import 'package:order_delivery/features/order/presentation/pages/home_page.dart';
 import 'package:order_delivery/features/auth/presentation/widgets/custom_text_form_field.dart';
 
@@ -38,39 +43,33 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
             listener: (context, state) {
               if (state is UpdatedUserProfileState) {
                 //TODO: show appropriate done message
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const HomePage()));
+                showSnackBar(context, Colors.grey.shade900, "update success");
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => HomePage(user: authState.user)));
               }
             },
             builder: (context, state) {
               if (state is UpdatingUserProfileState) {
                 //TODO: show appropriate loading widget
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.greenAccent,
-                  ),
-                );
+                return const CustomLoadingWidget();
               } else if (state is FailedUserState) {
                 //TODO: show error message in an appropriate way
-                return Center(
-                    child: Text(
-                  state.failure.failureMessage,
-                  style: TextStyle(color: Colors.red),
-                ));
+                showCustomAboutDialog(
+                    context, "update pro err", state.failure.failureMessage);
               }
-              return _buildUpdateProfilePage(authState.user.token);
+              return _buildUpdateProfilePage(authState.user);
             },
           );
         }
         // TODO:Return appropriate error widget
-        return Center(
-          child: Text("ERROR"),
+        return const CustomErrorWidget(
+          msg: "",
         );
       },
     );
   }
 
-  Widget _buildUpdateProfilePage(String userToken) {
+  Widget _buildUpdateProfilePage(UserEntity user) {
     final double height = MediaQuery.of(context).size.height;
 
     return SingleChildScrollView(
@@ -82,8 +81,8 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _buildFirstSection(),
-              _buildFinishButton(userToken),
+              _buildFirstSection(user),
+              _buildFinishButton(user.token),
             ],
           ),
         ),
@@ -91,14 +90,14 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     );
   }
 
-  Widget _buildFirstSection() {
+  Widget _buildFirstSection(UserEntity user) {
     return Column(
       children: [
         _buildTitle1(),
         _buildAddPicture(),
         _buildTitle2(),
         ..._buildTextFields(),
-        _buildSkipButton(),
+        _buildSkipButton(user),
       ],
     );
   }
@@ -122,16 +121,16 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                   }
                 },
                 style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
                     ),
-                    foregroundColor: WidgetStatePropertyAll(Colors.black),
-                    backgroundColor: WidgetStatePropertyAll(
+                    foregroundColor: const WidgetStatePropertyAll(Colors.black),
+                    backgroundColor: const WidgetStatePropertyAll(
                         Color.fromARGB(255, 19, 184, 104))),
                 child: Text(
-                  "finish",
+                  "finish".tr(context),
                   style: Theme.of(context).textTheme.bodyLarge,
                 )),
           ),
@@ -140,7 +139,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     );
   }
 
-  Widget _buildSkipButton() {
+  Widget _buildSkipButton(UserEntity user) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, right: 10),
       child: Row(
@@ -152,20 +151,20 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
           ),
           OutlinedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const HomePage()));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => HomePage(user: user)));
               },
               style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                     ),
                   ),
-                  foregroundColor: WidgetStatePropertyAll(Colors.black),
-                  backgroundColor: WidgetStatePropertyAll(
+                  foregroundColor: const WidgetStatePropertyAll(Colors.black),
+                  backgroundColor: const WidgetStatePropertyAll(
                       Color.fromARGB(255, 35, 184, 112))),
-              child:
-                  Text("Skip", style: Theme.of(context).textTheme.bodySmall)),
+              child: Text("skip".tr(context),
+                  style: Theme.of(context).textTheme.bodySmall)),
         ],
       ),
     );
@@ -179,12 +178,12 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
           textEditingController: firstNameTEC,
           validator: (value) {
             if (value!.isEmpty) {
-              return "this field shouldn't be Empty";
+              return "warning".tr(context);
             }
             return null;
           },
           // TODO: localize hint text
-          hintText: "first name",
+          hintText: "first name".tr(context),
           prefixIcon: const Icon(
             Icons.man,
             color: Colors.greenAccent,
@@ -198,12 +197,12 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
           textEditingController: secondNameTEC,
           validator: (value) {
             if (value!.isEmpty) {
-              return "this field shouldn't be Empty";
+              return "warning".tr(context);
             }
             return null;
           },
           //TODO: localize hint text
-          hintText: "last name",
+          hintText: "last name".tr(context),
           obsecure: false,
           prefixIcon: const Icon(
             Icons.man_2,
@@ -217,14 +216,14 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
           textEditingController: locationTEC,
           validator: (value) {
             if (value!.isEmpty) {
-              return "this field shouldn't be Empty";
+              return "warning".tr(context);
             }
             return null;
           },
           //TODO: localize hint text
-          hintText: "location",
+          hintText: "location".tr(context),
           obsecure: false,
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.location_on_outlined,
             color: Colors.greenAccent,
           ),
@@ -252,24 +251,24 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                                   const RelativeRect.fromLTRB(90, 260, 90, 0),
                               items: [
                                 PopupMenuItem(
-                                  child: const ListTile(
-                                    leading: Icon(
+                                  child: ListTile(
+                                    leading: const Icon(
                                       Icons.folder,
                                       color: Colors.green,
                                     ),
-                                    title: Text("from gallery "),
+                                    title: Text("from gallery".tr(context)),
                                   ),
                                   onTap: () {
                                     _pickImage(ImageSource.gallery);
                                   },
                                 ),
                                 PopupMenuItem(
-                                  child: const ListTile(
-                                    leading: Icon(
+                                  child: ListTile(
+                                    leading: const Icon(
                                       Icons.camera,
                                       color: Colors.green,
                                     ),
-                                    title: Text("from camera "),
+                                    title: Text("from camera".tr(context)),
                                   ),
                                   onTap: () {
                                     _pickImage(ImageSource.camera);
@@ -304,24 +303,24 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                         position: const RelativeRect.fromLTRB(90, 260, 90, 0),
                         items: [
                           PopupMenuItem(
-                            child: const ListTile(
-                              leading: Icon(
+                            child: ListTile(
+                              leading: const Icon(
                                 Icons.folder,
                                 color: Colors.green,
                               ),
-                              title: Text("from gallery "),
+                              title: Text("from gallery".tr(context)),
                             ),
                             onTap: () {
                               _pickImage(ImageSource.gallery);
                             },
                           ),
                           PopupMenuItem(
-                            child: const ListTile(
-                              leading: Icon(
+                            child: ListTile(
+                              leading: const Icon(
                                 Icons.camera,
                                 color: Colors.green,
                               ),
-                              title: Text("from camera "),
+                              title: Text("from camera".tr(context)),
                             ),
                             onTap: () {
                               _pickImage(ImageSource.camera);
@@ -345,7 +344,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20, top: 50),
       child: Text(
-        "add extra info about your self : ",
+        "extra info".tr(context),
         style: Theme.of(context).textTheme.headlineMedium,
       ),
     );
@@ -355,7 +354,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     return Padding(
       padding: const EdgeInsets.only(top: 30, bottom: 20),
       child: Text(
-        "add profile picture (Optional): ",
+        "profile".tr(context),
         style: Theme.of(context).textTheme.bodySmall,
       ),
     );
@@ -365,7 +364,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: Text(
-        "Update Profile Page ",
+        "update profile".tr(context),
         style: Theme.of(context).textTheme.bodyMedium,
       ),
     );

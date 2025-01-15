@@ -21,15 +21,22 @@ const String CHANGE_LANG_LINK = "$BASE_URL_ANDROID/language";
 //! Order routes
 
 //* product
-const String TOP_DEMAND_PRODUCTS_LINK = "$BASE_URL_ANDROID/most-ordered";
-const String LATEST_PRODUCTS_LINK = "$BASE_URL_ANDROID/latest";
-const String RANDOM_PRODUCTS_LINK = "$BASE_URL_ANDROID/products";
-const String SEARCH_PRODUCTS_LINK = "$BASE_URL_ANDROID/products";
-const String ORDER_PRODUCT_LINK = "$BASE_URL_ANDROID/order";
-const String ADD_PRODUCT_TO_FAV_LINK = "$BASE_URL_ANDROID/favorite";
-const String ADD_PRODUCT_TO_CART_LINK = "$BASE_URL_ANDROID/cart";
+const String PRODUCTS_LINK = "$BASE_URL_ANDROID/products";
+const String TOP_DEMAND_PRODUCTS_LINK = "$PRODUCTS_LINK/most-ordered";
+const String LATEST_PRODUCTS_LINK = "$PRODUCTS_LINK/latest";
+const String ORDER_LINK = "$BASE_URL_ANDROID/order";
+const String FAV_LINK = "$BASE_URL_ANDROID/favorite";
+const String ORDER_FAV_LINK = "$FAV_LINK/order";
+const String CANCEL_ORDER_LINK = "$BASE_URL_ANDROID/cancel-order";
+const String CART_LINK = "$BASE_URL_ANDROID/cart";
+const String ORDER_CART_LINK = "$BASE_URL_ANDROID/add-to-order";
 
+const String DRIVER_ORDERS_LINK = "$BASE_URL_ANDROID/driver-orders";
 //* store
-const String RANDOM_STORES_LINK = "$BASE_URL_ANDROID/stores";
-const String SEARCH_STORES_LINK = "$BASE_URL_ANDROID/stores";
-const String DETAILED_STORE_LINK = "$BASE_URL_ANDROID/stores";
+const String STORE_LINK = "$BASE_URL_ANDROID/stores";
+
+//! Order Status
+const String pending = 'pending';
+const String delivering = 'delivering';
+const String delivered = 'delivered';
+const String canceled = 'canceled';

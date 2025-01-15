@@ -1,0 +1,295 @@
+[
+    {
+      "order status": "canceled",
+      "driver_id": 2,
+      "products": [
+        {
+          "order details": {
+            "id": 27,
+            "order_id": 23,
+            "product_id": 1,
+            "price": "900.00",
+            "quantity": 3,
+            "created_at": "2025-01-13T15:02:25.000000Z",
+            "updated_at": "2025-01-13T15:02:25.000000Z"
+          },
+          "product details": {
+            "id": 1,
+            "en_name": "Smartphone",
+            "ar_name": "هاتف ذكي",
+            "en_description": "A high-performance smartphone with a sleek design, intuitive interface, and apps like Store, Gallery, Play Store, Google, Phone, Messages, Internet, and Camera. Includes a weather widget and dark geometric background.",
+            "ar_description": "هاتف ذكي عالي الأداء بتصميم أنيق وواجهة سهلة الاستخدام، يتضمن تطبيقات مثل المتجر والمعرض ومتجر الألعاب وجوجل والهاتف والرسائل والإنترنت والكاميرا. يحتوي على عنصر واجهة يعرض الطقس وخلفية بنمط هندسي داكن.",
+            "price": "300.00",
+            "quantity": 89,
+            "orders_count": 7,
+            "store_id": 3,
+            "created_at": "2025-01-11T07:41:36.000000Z",
+            "updated_at": "2025-01-13T15:04:19.000000Z",
+            "store": {
+              "id": 3,
+              "name": "Sumsung",
+              "logo": "http://127.0.0.1:8000/storage/logos/XiJ21OIsExHUmA3wsqWBzAJtReXiMLrUOcgKOESW.png",
+              "created_at": "2025-01-11T07:37:01.000000Z",
+              "updated_at": "2025-01-11T07:37:01.000000Z"
+            },
+            "images": [
+              {
+                "id": 1,
+                "path": "gallery/9nHq3TiDGevmyMZkVeUjE0LSnBNcTySKiUL5je5m.jpg",
+                "product_id": 1,
+                "created_at": "2025-01-11T07:41:37.000000Z",
+                "updated_at": "2025-01-11T07:41:37.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/9nHq3TiDGevmyMZkVeUjE0LSnBNcTySKiUL5je5m.jpg"
+              },
+              {
+                "id": 2,
+                "path": "gallery/iyXrt12ruGPQHigvC0NDVq0c1ray5tsHGgYIwjmG.jpg",
+                "product_id": 1,
+                "created_at": "2025-01-11T07:41:37.000000Z",
+                "updated_at": "2025-01-11T07:41:37.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/iyXrt12ruGPQHigvC0NDVq0c1ray5tsHGgYIwjmG.jpg"
+              },
+              {
+                "id": 3,
+                "path": "gallery/bl3IxyjTZlvY9V5hjtfvo9wryrO38AhqPBE3otic.jpg",
+                "product_id": 1,
+                "created_at": "2025-01-11T07:41:38.000000Z",
+                "updated_at": "2025-01-11T07:41:38.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/bl3IxyjTZlvY9V5hjtfvo9wryrO38AhqPBE3otic.jpg"
+              },
+              {
+                "id": 4,
+                "path": "gallery/u1QTHh9UENWHuOwkgc5ymTKWNMTGkiO1WXGvMxrd.jpg",
+                "product_id": 1,
+                "created_at": "2025-01-11T07:41:39.000000Z",
+                "updated_at": "2025-01-11T07:41:39.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/u1QTHh9UENWHuOwkgc5ymTKWNMTGkiO1WXGvMxrd.jpg"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "order status": "pending",
+      "driver_id": 2,
+      "products": [
+        {
+          "order details": {
+            "id": 28,
+            "order_id": 24,
+            "product_id": 1,
+            "price": "300.00",
+            "quantity": 1,
+            "created_at": "2025-01-13T15:03:56.000000Z",
+            "updated_at": "2025-01-13T15:03:56.000000Z"
+          },
+          "product details": {
+            "id": 1,
+            "en_name": "Smartphone",
+            "ar_name": "هاتف ذكي",
+            "en_description": "A high-performance smartphone with a sleek design, intuitive interface, and apps like Store, Gallery, Play Store, Google, Phone, Messages, Internet, and Camera. Includes a weather widget and dark geometric background.",
+            "ar_description": "هاتف ذكي عالي الأداء بتصميم أنيق وواجهة سهلة الاستخدام، يتضمن تطبيقات مثل المتجر والمعرض ومتجر الألعاب وجوجل والهاتف والرسائل والإنترنت والكاميرا. يحتوي على عنصر واجهة يعرض الطقس وخلفية بنمط هندسي داكن.",
+            "price": "300.00",
+            "quantity": 89,
+            "orders_count": 7,
+            "store_id": 3,
+            "created_at": "2025-01-11T07:41:36.000000Z",
+            "updated_at": "2025-01-13T15:04:19.000000Z",
+            "store": {
+              "id": 3,
+              "name": "Sumsung",
+              "logo": "http://127.0.0.1:8000/storage/logos/XiJ21OIsExHUmA3wsqWBzAJtReXiMLrUOcgKOESW.png",
+              "created_at": "2025-01-11T07:37:01.000000Z",
+              "updated_at": "2025-01-11T07:37:01.000000Z"
+            },
+            "images": [
+              {
+                "id": 1,
+                "path": "gallery/9nHq3TiDGevmyMZkVeUjE0LSnBNcTySKiUL5je5m.jpg",
+                "product_id": 1,
+                "created_at": "2025-01-11T07:41:37.000000Z",
+                "updated_at": "2025-01-11T07:41:37.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/9nHq3TiDGevmyMZkVeUjE0LSnBNcTySKiUL5je5m.jpg"
+              },
+              {
+                "id": 2,
+                "path": "gallery/iyXrt12ruGPQHigvC0NDVq0c1ray5tsHGgYIwjmG.jpg",
+                "product_id": 1,
+                "created_at": "2025-01-11T07:41:37.000000Z",
+                "updated_at": "2025-01-11T07:41:37.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/iyXrt12ruGPQHigvC0NDVq0c1ray5tsHGgYIwjmG.jpg"
+              },
+              {
+                "id": 3,
+                "path": "gallery/bl3IxyjTZlvY9V5hjtfvo9wryrO38AhqPBE3otic.jpg",
+                "product_id": 1,
+                "created_at": "2025-01-11T07:41:38.000000Z",
+                "updated_at": "2025-01-11T07:41:38.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/bl3IxyjTZlvY9V5hjtfvo9wryrO38AhqPBE3otic.jpg"
+              },
+              {
+                "id": 4,
+                "path": "gallery/u1QTHh9UENWHuOwkgc5ymTKWNMTGkiO1WXGvMxrd.jpg",
+                "product_id": 1,
+                "created_at": "2025-01-11T07:41:39.000000Z",
+                "updated_at": "2025-01-11T07:41:39.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/u1QTHh9UENWHuOwkgc5ymTKWNMTGkiO1WXGvMxrd.jpg"
+              }
+            ]
+          }
+        },
+        {
+          "order details": {
+            "id": 29,
+            "order_id": 24,
+            "product_id": 13,
+            "price": "25.00",
+            "quantity": 1,
+            "created_at": "2025-01-13T15:03:56.000000Z",
+            "updated_at": "2025-01-13T15:03:56.000000Z"
+          },
+          "product details": {
+            "id": 13,
+            "en_name": "Straw Hat",
+            "ar_name": "قبعة من القش",
+            "en_description": "A woven straw hat with a brown band around the base of the crown. Features a wide brim and ventilated design for breathability.",
+            "ar_description": "قبعة من القش محاكة بشريط بني حول قاعدة التاج. تتميز بحافة واسعة وتصميم مهواة للتهوية.",
+            "price": "25.00",
+            "quantity": 496,
+            "orders_count": 3,
+            "store_id": 2,
+            "created_at": "2025-01-11T07:57:38.000000Z",
+            "updated_at": "2025-01-13T15:03:56.000000Z",
+            "store": {
+              "id": 2,
+              "name": "Ali Baba",
+              "logo": "http://127.0.0.1:8000/storage/logos/FTZpLVT3I9gCMpOzxNIROpVRWn7nqXb9vuvrHzv6.png",
+              "created_at": "2025-01-11T07:36:11.000000Z",
+              "updated_at": "2025-01-11T07:36:11.000000Z"
+            },
+            "images": [
+              {
+                "id": 21,
+                "path": "gallery/FNN8tYUDwrBXpb0gr6m39gqw5PzOC8uloINfnRLL.png",
+                "product_id": 13,
+                "created_at": "2025-01-11T07:57:38.000000Z",
+                "updated_at": "2025-01-11T07:57:38.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/FNN8tYUDwrBXpb0gr6m39gqw5PzOC8uloINfnRLL.png"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "order status": "pending",
+      "driver_id": 2,
+      "products": [
+        {
+          "order details": {
+            "id": 30,
+            "order_id": 25,
+            "product_id": 5,
+            "price": "21.00",
+            "quantity": 3,
+            "created_at": "2025-01-14T03:25:40.000000Z",
+            "updated_at": "2025-01-14T03:25:40.000000Z"
+          },
+          "product details": {
+            "id": 5,
+            "en_name": "Grey Hoodie",
+            "ar_name": "سترة بغطاء رأس",
+            "en_description": "A comfortable grey hoodie with a front pocket, perfect for casual wear.",
+            "ar_description": "سترة بغطاء رأس رمادية مريحة مع جيب أمامي، مثالية للارتداء اليومي.",
+            "price": "7.00",
+            "quantity": 243,
+            "orders_count": 3,
+            "store_id": 2,
+            "created_at": "2025-01-11T07:50:11.000000Z",
+            "updated_at": "2025-01-14T03:26:02.000000Z",
+            "store": {
+              "id": 2,
+              "name": "Ali Baba",
+              "logo": "http://127.0.0.1:8000/storage/logos/FTZpLVT3I9gCMpOzxNIROpVRWn7nqXb9vuvrHzv6.png",
+              "created_at": "2025-01-11T07:36:11.000000Z",
+              "updated_at": "2025-01-11T07:36:11.000000Z"
+            },
+            "images": [
+              {
+                "id": 11,
+                "path": "gallery/acO3efqgLBcmb9ISi01f9oTnsQgvzk170fNjjC3c.png",
+                "product_id": 5,
+                "created_at": "2025-01-11T07:50:12.000000Z",
+                "updated_at": "2025-01-11T07:50:12.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/acO3efqgLBcmb9ISi01f9oTnsQgvzk170fNjjC3c.png"
+              },
+              {
+                "id": 12,
+                "path": "gallery/0mTwu9m4fcHv7IhPgwPi4KBM7ThS6S6TfUoEL5IK.png",
+                "product_id": 5,
+                "created_at": "2025-01-11T07:50:12.000000Z",
+                "updated_at": "2025-01-11T07:50:12.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/0mTwu9m4fcHv7IhPgwPi4KBM7ThS6S6TfUoEL5IK.png"
+              },
+              {
+                "id": 13,
+                "path": "gallery/bx9UrCqPf09xaxKnuNlMo7R3UgJrgMmkcTnNfax7.png",
+                "product_id": 5,
+                "created_at": "2025-01-11T07:50:13.000000Z",
+                "updated_at": "2025-01-11T07:50:13.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/bx9UrCqPf09xaxKnuNlMo7R3UgJrgMmkcTnNfax7.png"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "order status": "pending",
+      "driver_id": 2,
+      "products": [
+        {
+          "order details": {
+            "id": 31,
+            "order_id": 26,
+            "product_id": 10,
+            "price": "25.00",
+            "quantity": 1,
+            "created_at": "2025-01-14T03:25:56.000000Z",
+            "updated_at": "2025-01-14T03:25:56.000000Z"
+          },
+          "product details": {
+            "id": 10,
+            "en_name": "Black T-Shirt",
+            "ar_name": "قميص أسود",
+            "en_description": "A black t-shirt with a skeletal hand making a peace sign and \"STAY WILD\" written on a banner.",
+            "ar_description": "قميص أسود برسومات تحتوي على يد هيكل عظمي تشير بعلامة السلام وكلمة \"ابقَ بريًا\" على لافتة.",
+            "price": "25.00",
+            "quantity": 598,
+            "orders_count": 2,
+            "store_id": 1,
+            "created_at": "2025-01-11T07:55:01.000000Z",
+            "updated_at": "2025-01-14T03:25:56.000000Z",
+            "store": {
+              "id": 1,
+              "name": "Amazon",
+              "logo": "http://127.0.0.1:8000/storage/logos/91E01Yhcge2huy8U8Ufc6D00pjA05RbcOaj7eHm9.png",
+              "created_at": "2025-01-11T07:35:59.000000Z",
+              "updated_at": "2025-01-11T07:35:59.000000Z"
+            },
+            "images": [
+              {
+                "id": 18,
+                "path": "gallery/bmCk7y3FZAE6zlNm3Sik3aNfUnXM74k7PmLKuHpj.png",
+                "product_id": 10,
+                "created_at": "2025-01-11T07:55:02.000000Z",
+                "updated_at": "2025-01-11T07:55:02.000000Z",
+                "url": "http://127.0.0.1:8000/storage/gallery/bmCk7y3FZAE6zlNm3Sik3aNfUnXM74k7PmLKuHpj.png"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]

@@ -23,23 +23,23 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
   const StoreRemoteDataSourceImpl({required this.client});
   @override
   Future<List<StoreModel>> getRandomStores(String token) async {
-    return await _mapGetStores("$RANDOM_STORES_LINK?page=1", token);
+    return await _mapGetStores("$STORE_LINK?page=1", token);
   }
 
   @override
   Future<List<StoreModel>> searchStores(
       String token, String query, int pageNum) async {
     return await _mapGetStores(
-        "$SEARCH_STORES_LINK?search=$query&page=$pageNum", token);
+        "$STORE_LINK?search=$query&page=$pageNum", token);
   }
 
   @override
   Future<DetailedStoreEntity> getDetailedStore(
       String token, String storeId, int pageNum) async {
     try {
-      final Map<String, String> headers = {"Authorization": token};
+      final Map<String, String> headers = {"Authorization": "Bearer $token"};
       final response = await client.get(
-        Uri.parse("$DETAILED_STORE_LINK/$storeId?page=$pageNum"),
+        Uri.parse("$STORE_LINK/$storeId?page=$pageNum"),
         headers: headers,
       );
       if (response.statusCode == 200) {
@@ -50,7 +50,9 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
 
         final List<ProductModel> products = decodedProducts
             .map<ProductModel>(
-                (jsonProduct) => ProductModel.fromJson(jsonProduct))
+              (jsonProduct) => ProductModel.fromJson(jsonProduct,
+                  storeName: store.storeName),
+            )
             .toList();
         return DetailedStoreEntity(store: store, products: products);
       } else {
@@ -66,13 +68,13 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
 
   Future<List<StoreModel>> _mapGetStores(String getLink, String token) async {
     try {
-      final Map<String, String> headers = {"Authorization": token};
+      final Map<String, String> headers = {"Authorization": 'Bearer $token'};
       final response = await client.get(
         Uri.parse(getLink),
         headers: headers,
       );
       if (response.statusCode == 200) {
-        final List<dynamic> decodedJson = json.decode(response.body)['results'];
+        final List<dynamic> decodedJson = json.decode(response.body)['stores'];
         return decodedJson
             .map<StoreModel>((jsonProduct) => StoreModel.fromJson(jsonProduct))
             .toList();

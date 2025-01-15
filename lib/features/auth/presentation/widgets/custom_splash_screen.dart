@@ -18,10 +18,10 @@ class _CustomSplashScreenState extends State<CustomSplashScreen> {
   }
 
   Future<void> _navigateToNextScreen() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     if (context.mounted) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => MyApp()), (r) => false);
+          MaterialPageRoute(builder: (context) => const MyApp()), (r) => false);
     }
   }
 
@@ -40,7 +40,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen> {
         Positioned(
             left: 0.45 * width,
             bottom: 0.1 * height,
-            child: CircularProgressIndicator(
+            child: const CircularProgressIndicator(
               strokeWidth: 7,
               strokeAlign: 2,
               color: Colors.lightGreenAccent,

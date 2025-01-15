@@ -36,31 +36,33 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                state.user.role == 'driver'
+                    ? SizedBox(
+                        height: 10,
+                      )
+                    : SizedBox(
+                        height: 0.4 * height,
+                        child: (state.user.firstName == null ||
+                                state.user.firstName == "")
+                            ? _buildAddUserDataBtn()
+                            : _buildUserData(state.user),
+                      ),
                 SizedBox(
-                  height: 0.4 * height,
-                  child: (state.user.firstName == null ||
-                          state.user.firstName == "")
-                      ? _buildAddUserDataBtn()
-                      : _buildUserData(state.user),
-                ),
-                SizedBox(
-                    height: 0.3 * height,
+                    height: 0.25 * height,
                     child: _buildChangeLangBloc(state.user)),
                 SizedBox(
-                    height: 0.2 * height,
+                    height: 0.25 * height,
                     child: _buildLogoutBtn(state.user.token)),
               ],
             ),
           );
         } else if (state is LoadingAuthState) {
-          // TODO: show an appropriate loading widget
           return Center(
             child: CircularProgressIndicator(
               color: Colors.greenAccent,
             ),
           );
         } else if (state is FailedAuthState) {
-          // TODO: show an appropriate error widget
           return Center(
             child: Text(
               state.failure.failureMessage,
@@ -98,14 +100,14 @@ class _SettingsPageState extends State<SettingsPage> {
           "Missed Data",
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-        leading: Icon(
+        leading: const Icon(
           Icons.error,
           color: Colors.red,
           size: 40,
         ),
         onTap: () => Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const UpdateProfilePage())),
-        subtitle: Text("click here to set up profile",
+        subtitle: const Text("click here to set up profile",
             style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 18,
@@ -123,18 +125,16 @@ class _SettingsPageState extends State<SettingsPage> {
       },
       builder: (context, state) {
         if (state is ChangingUserLanguageState) {
-          // TODO: show an appropriate loading widget
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: Colors.greenAccent,
             ),
           );
         } else if (state is FailedUserState) {
-          // TODO: show an appropriate error widget
           return Center(
             child: Text(
               state.failure.failureMessage,
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
             ),
           );
         }
@@ -155,8 +155,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _buildChangeLangBtn(String token, String userLocal) {
     return MaterialButton(
+        height: 50,
         color: selectedLocal == userLocal ? Colors.black : Colors.blue,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20))),
         onPressed: (selectedLocal != userLocal)
             ? () {
@@ -166,7 +167,7 @@ class _SettingsPageState extends State<SettingsPage> {
             : null,
         child: Text(
           "Change Language",
-          style: Theme.of(context).textTheme.displayMedium,
+          style: Theme.of(context).textTheme.bodyMedium,
         ));
   }
 
@@ -199,12 +200,12 @@ class _SettingsPageState extends State<SettingsPage> {
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: MaterialButton(
                 height: 50,
                 color: Colors.green,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
                 onPressed: () {
                   BlocProvider.of<AuthBloc>(context)
                       .add(LogoutEvent(token: token));

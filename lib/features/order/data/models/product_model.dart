@@ -14,20 +14,21 @@ class ProductModel extends ProductEntity {
       required super.ordersCount,
       required super.price});
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
+  factory ProductModel.fromJson(Map<String, dynamic> json,
+      {String storeName = "not available", int? quantity}) {
     return ProductModel(
-        productId: json['id'],
-        storeId: json['store_id'],
+        productId: json['id'].toString(),
+        storeId: json['store_id'].toString(),
         englishName: json['en_name'],
         arabicName: json['ar_name'],
         englishDescription: json['en_description'],
-        storeName: json['store_name'],
+        storeName: json['store_name'] ?? storeName,
         arabicDescription: json['ar_description'],
         productPictures:
             List<String>.from(json['images'].map((image) => image['url'])),
-        quantity: json['quantity'],
+        quantity: quantity ?? json['quantity'],
         ordersCount: json['orders_count'],
-        price: json['price']);
+        price: double.parse(json['price']).toInt());
   }
 
   Map<String, dynamic> toJson() {

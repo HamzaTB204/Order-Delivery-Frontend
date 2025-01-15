@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_delivery/core/util/functions/functions.dart';
 import 'package:order_delivery/core/util/lang/app_localizations.dart';
-import 'package:order_delivery/core/util/variables/others.dart';
+import 'package:order_delivery/features/auth/presentation/widgets/costum_loading_widget.dart';
 import 'package:order_delivery/features/auth/presentation/widgets/custom_text_form_field.dart';
 import '../bloc/auth_bloc/auth_bloc.dart';
 import 'signup_page.dart';
@@ -40,21 +40,20 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoggedinAuthState) {
-          // TODO: show logged in message
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            showSnackBar(
+                context, Colors.grey.shade900, "logged in msg".tr(context));
+          });
         } else if (state is FailedAuthState) {
-          //TODO: use this example to show error message in an appropriate way
-          showCustomAboutDialog(
-              context, "Login Error", state.failure.failureMessage);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            showCustomAboutDialog(
+                context, "Auth Error", state.failure.failureMessage);
+          });
         }
       },
       builder: (context, state) {
         if (state is LoadingAuthState) {
-          //TODO: show appropriate loading widget
-          return Center(
-            child: CircularProgressIndicator(
-              color: Colors.greenAccent,
-            ),
-          );
+          return const CustomLoadingWidget();
         } else {
           return Form(
             key: loginFormKey,
@@ -85,8 +84,8 @@ class _LoginPageState extends State<LoginPage> {
             style: Theme.of(context).textTheme.displaySmall),
         InkWell(
           onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => SignupPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SignupPage()));
           },
           child: Text(
             "su".tr(context),
@@ -114,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: WidgetStatePropertyAll(EdgeInsets.all(15))),
           onPressed: () {
             if (loginFormKey.currentState!.validate()) {
+              FocusScope.of(context).unfocus();
               BlocProvider.of<AuthBloc>(context).add(LoginEvent(
                   phoneNumber: phoneNumberTEC.text.trim(),
                   password: passwordTEC.text.trim()));
@@ -155,9 +155,10 @@ class _LoginPageState extends State<LoginPage> {
           validator: (value) {
             if (value!.isEmpty) {
               return "warning".tr(context);
-            } else if (!numberExp.hasMatch(phoneNumberTEC.text)) {
-              return "warning3".tr(context);
             }
+            // else if (!numberExp.hasMatch(phoneNumberTEC.text)) {
+            //   return "warning3".tr(context);
+            // }
             return null;
           },
           prefixIcon: const Icon(

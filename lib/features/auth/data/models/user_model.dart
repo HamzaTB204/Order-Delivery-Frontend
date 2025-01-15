@@ -5,6 +5,7 @@ class UserModel extends UserEntity {
     required super.phoneNumber,
     required super.password,
     required super.token,
+    required super.role,
     required super.firstName,
     required super.lastName,
     required super.profilePictureURL,
@@ -18,6 +19,7 @@ class UserModel extends UserEntity {
       phoneNumber: json['phone'],
       password: password ?? json['password'],
       token: json['token'],
+      role: json['role'],
       firstName: json['first_name'],
       lastName: json['last_name'],
       profilePictureURL: json['profile_picture'],
@@ -36,6 +38,7 @@ class UserModel extends UserEntity {
       'profile_picture': profilePictureURL,
       'location': location,
       'locale': locale,
+      'role': role,
       'token': token,
     };
   }
@@ -47,6 +50,7 @@ class UserModel extends UserEntity {
         token: token,
         firstName: firstName,
         lastName: lastName,
+        role: role,
         profilePictureURL: profilePictureURL,
         location: location,
         locale: locale);

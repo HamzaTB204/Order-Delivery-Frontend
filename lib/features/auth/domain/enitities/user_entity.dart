@@ -1,9 +1,10 @@
 class UserEntity {
   final String phoneNumber, password, token;
-  final String? firstName, lastName, profilePictureURL, location, locale;
+  final String? role, firstName, lastName, profilePictureURL, location, locale;
 
   UserEntity(
       {required this.phoneNumber,
+      required this.role,
       required this.password,
       required this.token,
       required this.firstName,

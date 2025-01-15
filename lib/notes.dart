@@ -8,5 +8,4 @@
 
 
 
-// TODO(Hayyan Tasks): add getFavoriteProducts - getCartProducts - orderCartProducts  
-// TODO:check on login (will it take the user locale from data base and continue?)
+// TODO(Hayyan Tasks):   change buttons in cart & orders page after moving the fav to app bar   

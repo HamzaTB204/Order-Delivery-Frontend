@@ -71,6 +71,7 @@ class UserRepositoryImpl implements UserRepository {
         lastName: lastName,
         locale: user.locale,
         location: location,
+        role: user.role,
         password: user.password,
         phoneNumber: user.phoneNumber,
         token: token,
@@ -84,6 +85,7 @@ class UserRepositoryImpl implements UserRepository {
         locale: locale,
         location: user.location,
         password: user.password,
+        role: user.role,
         phoneNumber: user.phoneNumber,
         token: user.token,
         profilePictureURL: user.profilePictureURL);

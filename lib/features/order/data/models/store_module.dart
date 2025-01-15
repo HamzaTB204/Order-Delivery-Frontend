@@ -9,16 +9,16 @@ class StoreModel extends StoreEntity {
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
     return StoreModel(
-        storeId: json['store_id'],
-        storeName: json['store_name'],
+        storeId: json['id'].toString(),
+        storeName: json['name'],
         logo: json['logo'],
         productCount: json['product_count']);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'store_id': storeId,
-      'store_name': storeName,
+      'id': storeId,
+      'name': storeName,
       'logo': logo,
       'product_count': productCount
     };
